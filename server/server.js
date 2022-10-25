@@ -8,7 +8,11 @@ const cors = require('cors');
 const app = express();
 
 //import routes
-const postRoutes = require('./routes/babiesRoutes');
+const babiesPostRoutes = require('./routes/babiesRoutes');
+const menPostRoutes = require('./routes/menRoutes');
+const womenPostRoutes = require('./routes/womenRoutes');
+const kidsPostRoutes = require('./routes/kidsRoutes');
+const accessoriesPostRoutes = require('./routes/accessoriesRoutes');
 const userRoutes = require('./routes/userRoutes');
 
 
@@ -17,11 +21,16 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //route middleware
-app.use(postRoutes);
+app.use(babiesPostRoutes);
+app.use(menPostRoutes);
+app.use(womenPostRoutes);
+app.use(kidsPostRoutes);
+app.use(accessoriesPostRoutes);
 app.use(userRoutes);
 
 const PORT = 8000;
-const DB_URL = 'mongodb+srv://Hasala:8Q8YbJlS6rzXSxN5@mernapp.jqtisuz.mongodb.net/mernCrud?retryWrites=true&w=majority';
+const DB_URL = 'mongodb+srv://hasala:hasala@cluster0.uohjojl.mongodb.net/RAD_DB?retryWrites=true&w=majority';
+
 
 mongoose.connect(DB_URL, {
     useNewUrlParser: true,
@@ -39,8 +48,3 @@ mongoose.connect(DB_URL, {
 app.listen(PORT, () => {
     console.log(`App is running on ${PORT}`)
 })
-
-
-
-
-// as there were no frond end at this stage use postman to check

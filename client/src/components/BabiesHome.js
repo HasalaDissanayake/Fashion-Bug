@@ -16,12 +16,11 @@ export default class Home extends Component {
   }
 
   retrievePosts() {
-    axios.get("http://localhost:8000/posts").then(res => {
+    axios.get("http://localhost:8000/babies/posts").then(res => {
       if (res.data.success) {
         this.setState({
           posts: res.data.existingPosts
         });
-
         console.log(this.state.posts)
     }
   })
@@ -29,7 +28,7 @@ export default class Home extends Component {
   
   onDelete = (id) => {
     
-    axios.delete(`http://localhost:8000/post/delete/${id}`).then((res) => {
+    axios.delete(`http://localhost:8000/babies/post/delete/${id}`).then((res) => {
       alert("Deleted Successfully")
       this.retrievePosts();
     })
@@ -40,11 +39,9 @@ export default class Home extends Component {
     const result = posts.filter((post) =>
       post.topic.includes(searchKey) ||
       post.description.includes(searchKey) ||
-      post.postCategory.includes(searchKey) ||
       //if checked with lower case
       post.topic.toLowerCase().includes(searchKey) ||
-      post.description.toLowerCase().includes(searchKey) ||
-      post.postCategory.toLowerCase().includes(searchKey)
+      post.description.toLowerCase().includes(searchKey) 
     )
 
     this.setState({posts:result})
@@ -53,7 +50,7 @@ export default class Home extends Component {
   handleSearchArea = (e) => {
     const searchKey = e.currentTarget.value;
 
-    axios.get("http://localhost:8000/posts").then(res => {
+    axios.get("http://localhost:8000/babies/posts").then(res => {
       if (res.data.success) {
 
         this.filterData(res.data.existingPosts,searchKey)
@@ -85,9 +82,9 @@ export default class Home extends Component {
           <thead>
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">Topic</th>
+              <th scope="col">Item</th>
               <th scope="col">Description</th>
-              <th scope="col">Post Category</th>
+              <th scope="col">Price</th>
               {/* for edit delete */}
               <th scope="col">Action</th>
             </tr>
@@ -103,7 +100,7 @@ export default class Home extends Component {
                   </a>
                 </td>
                 <td>{posts.description}</td>
-                <td>{posts.postCategory}</td>
+                <td>{posts.price}</td>
                 <td>
                   <a className="btn btn-warning" href={`/dashboard/babies/edit/${posts._id}`}>
                     <i className="fas fa-edit"></i>&nbsp;Edit

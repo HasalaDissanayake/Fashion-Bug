@@ -25,4 +25,4 @@ const postSchema = new mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('babiesPosts',postSchema)
+module.exports = mongoose.model('menPosts',postSchema)

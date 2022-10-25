@@ -14,9 +14,9 @@ class PostDetails extends Component {
     componentDidMount() {
         
         // const id = this.props.match.params.id; not working in react-router-dom v5 onwards
-        const id = window.location.pathname.substring(23);
+        const id = window.location.pathname.substring(22);
 
-        axios.get(`http://localhost:8000/post/${id}`).then((res) => {
+        axios.get(`http://localhost:8000/women/post/${id}`).then((res) => {
             if (res.data.success) {
                 this.setState({
                     post: res.data.post
@@ -30,7 +30,7 @@ class PostDetails extends Component {
 
     render() {
 
-        const { topic, description, postCategory } = this.state.post;
+        const { topic, description, price } = this.state.post;
         return (
             <div style={{marginTop:'20px'}}>
                 <h4>{topic}</h4>
@@ -40,8 +40,8 @@ class PostDetails extends Component {
                     <dt className='col-sm-3'>Description</dt>
                     <dd className='col-sm-9'>{description}</dd>
 
-                    <dt className='col-sm-3'>Post Category</dt>
-                    <dd className='col-sm-9'>{postCategory}</dd>                    
+                    <dt className='col-sm-3'>Price</dt>
+                    <dd className='col-sm-9'>{price}</dd>                    
                 </dl>
 
             </div>

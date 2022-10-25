@@ -9,7 +9,7 @@ class CreatePost extends Component {
         this.state = {
             topic: "",
             description: "",
-            postCategory:""
+            price:""
         };
     }
 
@@ -26,24 +26,24 @@ class CreatePost extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        const { topic, description, postCategory } = this.state;
+        const { topic, description, price } = this.state;
 
         const data = {
             topic: topic,
             description: description,
-            postCategory: postCategory
+            price: price
         }
 
         console.log(data);
 
-        axios.post('http://localhost:8000/post/save', data).then((res) => {
+        axios.post('http://localhost:8000/women/post/save', data).then((res) => {
             if (res.data.success) {
                 alert("Created Post Successfully")
                 this.setState(
                     {
                         topic: "",
                         description: "",
-                        postCategory:""
+                        price:""
                     }
                 )
             }
@@ -77,12 +77,12 @@ class CreatePost extends Component {
                     </div>
 
                     <div className='form-group' style={{ marginBottom: '15px' }}>
-                        <label style={{ marginBottom: '5px' }}>Post Category</label>
+                        <label style={{ marginBottom: '5px' }}>Price</label>
                         <input type='text'
                             className='form-control'
-                            name='postCategory'
-                            placeholder='Enter Post Category'
-                            value={this.state.postCategory}
+                            name='price'
+                            placeholder='Enter Price'
+                            value={this.state.price}
                             onChange={this.handleInputChange}/>
                     </div>
 

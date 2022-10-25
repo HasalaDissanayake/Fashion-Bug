@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class EditPost extends Component {
+class CreatePost extends Component {
 
     constructor(props) {
         super(props);
@@ -9,7 +9,7 @@ class EditPost extends Component {
         this.state = {
             topic: "",
             description: "",
-            postCategory:""
+            price:""
         };
     }
 
@@ -24,59 +24,37 @@ class EditPost extends Component {
     }
 
     onSubmit = (e) => {
-        
         e.preventDefault();
-        //still backend URL is http://localhost:8000/post/${id}
-        const id = window.location.pathname.substring(23);
 
-        const { topic, description, postCategory } = this.state;
+        const { topic, description, price } = this.state;
 
         const data = {
             topic: topic,
             description: description,
-            postCategory: postCategory
+            price: price
         }
 
         console.log(data);
 
-        axios.put(`http://localhost:8000/post/update/${id}`, data).then((res) => {
+        axios.post('http://localhost:8000/kids/post/save', data).then((res) => {
             if (res.data.success) {
-                alert("Post Update Successfully")
+                alert("Created Post Successfully")
                 this.setState(
                     {
                         topic: "",
                         description: "",
-                        postCategory:""
+                        price:""
                     }
                 )
             }
         })
-    }
-    
-    
-    componentDidMount() {
-        
-        // const id = this.props.match.params.id;
-        const id = window.location.pathname.substring(23);
-
-        axios.get(`http://localhost:8000/post/${id}`).then((res) => {
-            if (res.data.success) {
-                this.setState({
-                    topic: res.data.post.topic,
-                    description: res.data.post.description,
-                    postCategory:res.data.post.postCategory
-                });
-            }
-        });
-
-        console.log(this.state.post);
     }
 
 
     render() {
         return (
             <div className='col-md-8 mt-4 mx-auto'>
-                <h1 className='h3 mb-3 font-weight-normal'>Edit post</h1>
+                <h1 className='h3 mb-3 font-weight-normal'>Create new post</h1>
                 <form className='needs-validation' noValidate>
                     <div className='form-group' style={{ marginBottom: '15px' }}>
                         <label style={{ marginBottom: '5px' }}>Topic</label>
@@ -99,18 +77,18 @@ class EditPost extends Component {
                     </div>
 
                     <div className='form-group' style={{ marginBottom: '15px' }}>
-                        <label style={{ marginBottom: '5px' }}>Post Category</label>
+                        <label style={{ marginBottom: '5px' }}>Price</label>
                         <input type='text'
                             className='form-control'
-                            name='postCategory'
-                            placeholder='Enter Post Category'
-                            value={this.state.postCategory}
+                            name='price'
+                            placeholder='Enter Price'
+                            value={this.state.price}
                             onChange={this.handleInputChange}/>
                     </div>
 
                     <button className='btn btn-success' type='submit' style={{ marginTop: '15px' }} onClick={this.onSubmit}>
                         <i className='far fa-check-square'></i>
-                        &nbsp; Update
+                        &nbsp; Save
                     </button>
                 
                 </form>
@@ -119,4 +97,5 @@ class EditPost extends Component {
         );
     }
 }
-export default EditPost;
+
+export default CreatePost;

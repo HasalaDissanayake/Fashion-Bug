@@ -1,12 +1,12 @@
 const express = require('express')
 //import user model
-const Posts = require('../models/babiesCollection')
+const Posts = require('../models/menCollection')
 
 const router = express.Router();
 
 //save posts
 
-router.post('/babies/post/save', (req, res) => {
+router.post('/men/post/save', (req, res) => {
     
     let newPost = new Posts(req.body);
 
@@ -25,7 +25,7 @@ router.post('/babies/post/save', (req, res) => {
 
 //get posts
 
-router.get('/babies/posts', (req, res) => {
+router.get('/men/posts', (req, res) => {
     //mongoose find method
     Posts.find().exec((err, posts) => {
         if (err) {
@@ -42,7 +42,7 @@ router.get('/babies/posts', (req, res) => {
 
 //get a specific post
 
-router.get("/babies/post/:id", (req, res) => {
+router.get("/men/post/:id", (req, res) => {
     
     let postId = req.params.id;
     Posts.findById(postId, (err, post) => {
@@ -62,7 +62,7 @@ router.get("/babies/post/:id", (req, res) => {
 //update post
 
 
-router.put('/babies/post/update/:id', (req, res) => {
+router.put('/men/post/update/:id', (req, res) => {
     //mongoose findbyidandupdate method
     Posts.findByIdAndUpdate(
         //to update the whole request body
@@ -86,7 +86,7 @@ router.put('/babies/post/update/:id', (req, res) => {
 //delete post
 
 //need id a specific post
-router.delete('/babies/post/delete/:id', (req, res) => {
+router.delete('/men/post/delete/:id', (req, res) => {
     //find by id and remove method
     Posts.findByIdAndRemove(req.params.id).exec((err, deletedPost) => {
         if (err) {
