@@ -1,3 +1,3 @@
-# MERN-Project<br><br>
+# Fashion Bug<br><br>
 
 MERN project with CRUD operations.
